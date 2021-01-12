@@ -1,0 +1,8 @@
+__pycache__
+tracker/__pycache__
+settings.py
+BudgetApp/settings.py
+wsgi.py
+BudgetApp/wsgi.py
+migrations
+db.sqlite3

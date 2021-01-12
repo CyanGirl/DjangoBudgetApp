@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<br />
+{% block nav %}
+<a href="{% url 'home' %}">Home Page</a>
+{% endblock %}
+<br />
+{% block content %}
+<br />
+<h2>Login</h2>
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <input type="submit" value="Login" class="btn btn-primary" />
+</form>
+
+{% endblock %}

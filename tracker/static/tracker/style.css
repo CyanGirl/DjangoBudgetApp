@@ -1,0 +1,13 @@
+img {
+  width: 100vw;
+  height: 45vh;
+}
+body {
+  background-color: aquamarine;
+}
+@media (min-width: 710px) {
+  img {
+    width: 60vw;
+    height: 70vh;
+  }
+}

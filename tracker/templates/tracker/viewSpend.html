@@ -1,0 +1,29 @@
+{%extends 'base.html' %} {% block nav %}
+<a href="{% url 'spend' %}">Add Spending</a>
+<a href="{% url 'home' %}">Home Page</a>
+{% endblock %}
+<br />
+{% block content %}
+<h3>Here is your Total Spendings..</h3>
+<br />
+
+<div class="table-responsive container">
+  <table class="table-striped">
+    <tr>
+      {% for head in header %}
+      <th>{{head}}</th>
+      {% endfor %}
+    </tr>
+
+    <br />
+    {% for data in table %}
+    <tr>
+      {% for rowdata in data %}
+      <td>{{rowdata}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
