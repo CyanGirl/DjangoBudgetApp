@@ -1,0 +1,27 @@
+<a href="{% url 'home' %}">Home</a>
+
+{% if user.is_authenticated %}
+
+<h2>Account Settings</h2>
+<h4>Hi, {{user.username}}...<br />Choose options carefully!</h4>
+<p>1. Change Password</p>
+<a href="{% url 'password_change' %}">Change Password</a>
+<br />
+<form method="POST">
+  {%csrf_token%}
+  <p>2. To delete Account:</p>
+  <label for="usertyped"
+    >Confirm By Typing:
+    <input
+      type="text"
+      name="usertyped"
+      id="usertyped"
+      placeholder="Username"
+      required
+  /></label>
+  <button type="submit" name="option" value="deleteme">Delete Account</button>
+</form>
+
+{% else %}
+<h2>Please Login or Signup!</h2>
+{% endif %}

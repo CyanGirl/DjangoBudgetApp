@@ -3,9 +3,10 @@ from .form import CustomUserForm, SpendForm
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login
+from django.contrib.auth import logout 
 from django.utils import timezone
 from datetime import datetime
-from .calcData import getMonthDetails
+from .calcData import getMonthDetails,allSpendings,getDayDetails
 
 # Create your views here.
 def home(request):
@@ -14,7 +15,7 @@ def home(request):
         if request.method=="GET":  
             date=str(datetime.now())[0:7]
             print(date)
-            spendList=request.user.spend_set.all()
+            spendList=request.user.spend_set.all().order_by('-date_added')
             filtered=[]
             for obj in spendList:
                     temp=[]
@@ -25,12 +26,22 @@ def home(request):
                     temp.append(obj.comments)
                     filtered.append(temp)
 
-            header=['Spend_ID','Category','Amount','Spent_On','Comments']    
             data=getMonthDetails(filtered,date)
-            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":"Present Month","categorised":data[3],"eachsum":data[4]}
+
+            todaydate=str(datetime.now())[0:10]
+            print(todaydate)
+            todaydata=getDayDetails(filtered,todaydate)
+            print(todaydata)
+
+            header=['Spend_ID','Category','Amount','Spent_On','Comments']    
+            
+            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":"Present Month","categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":todaydata[0],"daysum":todaydata[1]}
             return render(request,"tracker/home.html",context)
 
         else:
+            username=request.user.username
+            print(username)
+
             option=request.POST['view']
             
             date=request.POST[option]
@@ -47,6 +58,7 @@ def home(request):
                     temp.append(obj.comments)
                     filtered.append(temp)
 
+            
             header=['Spend_ID','Category','Amount','Spent_On','Comments']    
             data=getMonthDetails(filtered,date)
             if len(data[0])<1:
@@ -54,7 +66,7 @@ def home(request):
             else:
                 message=f"Spendings for {date}"
             print(data[3])
-            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":message,"categorised":data[3],"eachsum":data[4]}
+            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":message,"categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":False,"daysum":0}
             return render(request,"tracker/home.html",context)
     
     else: 
@@ -148,16 +160,37 @@ def ViewSpends(request):
             filtered.append(temp)
 
 
+        print(filtered)
+        data=allSpendings(filtered)
         header=['Spend_ID','Category','Amount','Spent_On','Comments']
-        context={"table":filtered,"header":header}
+        context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":"All Expenditure till now...","categorised":data[3],"eachsum":data[4],"havedetails":data[5]}
+
+        #context={"table":filtered,"header":header}
         return render(request,"tracker/viewSpend.html",context)
 
     else:
         return redirect(reverse("login"))
 
-def monthlySpends(request):
-    pass
+def accountSettings(request):
+
+    if request.user.is_authenticated:
+        if request.method=="POST":
+            option=request.POST['option']
+            if option=="deleteme":
+                username=(request.user.username)
+                user=User.objects.filter(username=username)
+                typed=request.POST['usertyped']
+                print(typed)
+                if typed==username:
+                    logout(request)
+                    user.delete()
+                    return render(request,"tracker/home.html")
 
 
+            return render(request,"tracker/settings.html")
 
+        else:
+            return render(request,"tracker/settings.html")
 
+    else:
+        return render(request,"tracker/home.html")

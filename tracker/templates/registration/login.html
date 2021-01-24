@@ -1,15 +1,39 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+</head>
+<body class="bgcolor"> 
+  {% load static %}
+<link rel="stylesheet" type="text/CSS" href="{%static 'tracker/registration.css' %}" />
 <br />
+
 {% block nav %}
-<a href="{% url 'home' %}">Home Page</a>
+<a href="{% url 'home' %}" style="color: aliceblue;   text-decoration: none;align-items: center;" class="homepagelink"><i class="fa fa-home"></i>Home</a>
 {% endblock %}
 <br />
 {% block content %}
 <br />
-<h2>Login</h2>
+
+<div class="box" >
+<div class="imagesection">
+  <img id="userimg" src="https://cdn.dribbble.com/users/1913706/screenshots/4065401/laptop-user.png?compress=1&resize=800x600" alt="User Image With Laptop">
+</div>
+<div class="loginsection" style="font-family: 'Quicksand', sans-serif;">
+  <h2 class="userlogintext">User Login</h2>
 <form method="POST">
   {% csrf_token %} {{form.as_p}}
-  <input type="submit" value="Login" class="btn btn-primary" />
-</form>
+   
+  <button id="login" type="submit" value="Login">Login <i class="fa fa-sign-in" ></i>
+    </button>
+  </form>
+  </div>
+
+</div>
 
 {% endblock %}
+</body>
+</html>

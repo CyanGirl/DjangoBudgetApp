@@ -1,12 +1,19 @@
-{%extends 'base.html' %} {% block nav %}
+{% load static %}
+<link rel="stylesheet" type="text/CSS" href="{%static 'tracker/style.css' %}" />
+<br />
+{% block nav %}
 <a href="{% url 'spend' %}">Add Spending</a>
 <a href="{% url 'home' %}">Home Page</a>
 {% endblock %}
 <br />
-{% block content %}
-<h3>Here is your Total Spendings..</h3>
+{% block content %} {% if havedetails %}
 <br />
-
+<h5>{{message}}</h5>
+<p>
+  The total Amount Spent: {{total}}
+  <br />
+  Number of days Spent: {{count}}
+</p>
 <div class="table-responsive container">
   <table class="table-striped">
     <tr>
@@ -25,5 +32,53 @@
     {% endfor %}
   </table>
 </div>
+<br />
 
-{% endblock %}
+<br />
+<br />
+<h5>Category Based:</h5>
+<div class="table-responsive container">
+  {% for category,table in categorised.items %}
+
+  <table class="table-striped">
+    <caption>
+      {{category}}
+    </caption>
+    <tr>
+      {% for head in header %}
+      <th>{{head}}</th>
+      {% endfor %}
+    </tr>
+
+    <br />
+    {% for data in table %}
+    <tr>
+      {% for rowdata in data %}
+      <td>{{rowdata}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% endfor %}
+</div>
+<div class="table-responsive container">
+  <table class="table-striped">
+    {% for data,value in eachsum.items %}
+    <tr>
+      <td>{{data}}</td>
+      <td>{{value}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<img src="{% static 'images/allPie.png' %}" alt="allpie" />
+
+{% else %}
+
+<h2 class="title">
+  Whhops!!<br />
+  Looks like you have no spendings....
+</h2>
+
+{% endif %} {% endblock %}
