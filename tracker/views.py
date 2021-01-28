@@ -35,7 +35,7 @@ def home(request):
 
             header=['Spend_ID','Category','Amount','Spent_On','Comments']    
             
-            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":"Present Month","categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":todaydata[0],"daysum":todaydata[1]}
+            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":"Present Month","categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":todaydata[0],"daysum":todaydata[1],"showguest":False}
             return render(request,"tracker/home.html",context)
 
         else:
@@ -66,50 +66,50 @@ def home(request):
             else:
                 message=f"Spendings for {date}"
             print(data[3])
-            context={"table":data[0],"header":header,"total":data[1],"count":data[2],"message":message,"categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":False,"daysum":0}
+            context={"showguest":False,"table":data[0],"header":header,"total":data[1],"count":data[2],"message":message,"categorised":data[3],"eachsum":data[4],"showbar":data[5],"havedetails":data[6],"haveday":False,"daysum":0}
             return render(request,"tracker/home.html",context)
     
     else: 
+        context={"showguest":False}
         return render(request,"tracker/home.html")
-
 
 
 def register(request):
 
     if request.user.is_authenticated:
         return redirect(reverse("home"))
-
     
     if request.method=="GET":
-        context={"form":CustomUserForm}
+        context={"message":"","show":False}
         return render(request,"tracker/register.html",context)
 
     if request.method=="POST":
 
-        form=CustomUserForm(request.POST)
+        username=request.POST['username']
+        password1=request.POST['password1']
+        password2=request.POST['password2']
 
-        if form.is_valid():
-            print("valid")
+        #print(username,password1,password2)
+        checkuser=User.objects.filter(username=username).exists()
 
-            userDict=form.cleaned_data
-
-            username=userDict["username"]
-
-            checkuser=User.objects.filter(username=username).exists()
-
-            if checkuser:
-                print("User exists")
-                return redirect(reverse("home"))
-
-            else:
-                print("User saving")
-                user=form.save()
-                login(request,user)
-                return redirect(reverse("home"))
+        if checkuser:
+            message="Whoops! Username Exists..."
+            print(message)
+            context={"message":message,"show":True}
+            return render(request,"tracker/register.html",context)
 
         else:
-            print("Invalid form")
-            return redirect(reverse("home"))
+            
+            if password1==password2:
+                print("User saving")
+                user=User.objects.create_user(username,password1)
+                user.save()
+                login(request,user)
+                return redirect(reverse("home"))
+            else:
+                message="Whoops! Passwords did not match..."
+                context={"message":message,"show":True}
+                return render(request,"tracker/register.html",context)
 
 
     return redirect(reverse("home"))
@@ -177,20 +177,27 @@ def accountSettings(request):
         if request.method=="POST":
             option=request.POST['option']
             if option=="deleteme":
+
                 username=(request.user.username)
                 user=User.objects.filter(username=username)
                 typed=request.POST['usertyped']
                 print(typed)
                 if typed==username:
+
                     logout(request)
                     user.delete()
-                    return render(request,"tracker/home.html")
+                    context={"showguest":True,"showmsg":"Your account has been Deleted Succesfully..."}
+                    return render(request,"tracker/home.html",context)
 
-
-            return render(request,"tracker/settings.html")
+                else:
+                    deletemsg="Error! Incorrect Username..."
+                    context={"deletemsg":deletemsg,"show":True}
+                    return render(request,"tracker/settings.html",context)
 
         else:
-            return render(request,"tracker/settings.html")
+            context={"show":False}
+            return render(request,"tracker/settings.html",context)
 
     else:
+        context={"showguest":False,"showmsg":""}
         return render(request,"tracker/home.html")

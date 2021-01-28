@@ -10,6 +10,10 @@
 <form method="POST">
   {%csrf_token%}
   <p>2. To delete Account:</p>
+  {% if show %}
+  <p>{{deletemsg}}</p>
+  {% endif%}
+
   <label for="usertyped"
     >Confirm By Typing:
     <input

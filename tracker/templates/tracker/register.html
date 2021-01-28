@@ -2,8 +2,25 @@
 <a href="{% url 'home' %}">Home Page</a>
 {% endblock %} {%block content%}
 <h2>Sign up</h2>
+
+{% if show %}
+<p>{{message}}</p>
+{% endif %}
+<br />
 <form method="POST">
-  {%csrf_token%} {{form.as_p}}
+  {%csrf_token%}
+  <label for="username"
+    >Username
+    <input type="text" name="username" placeholder="username" id="username" />
+  </label>
+  <label for="password1"
+    >Password
+    <input type="password" name="password1" id="password1" placeholder="" />
+  </label>
+  <label for="password2"
+    >Confirm Password
+    <input type="password" name="password2" id="password2" placeholder="" />
+  </label>
   <input type="submit" value="Sign up" class="btn btn-primary" />
 </form>
 

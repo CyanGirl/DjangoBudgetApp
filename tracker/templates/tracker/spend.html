@@ -1,15 +1,30 @@
 {%extends 'base.html' %} {% block nav %}
-<a href="{% url 'home' %}">Home Page</a>
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" type="text/CSS" href="{%static 'tracker/spend.css' %}" />
+</head>
+<body class="bgcolor"> 
+  <a href="{% url 'home' %}" style="color: aliceblue;   text-decoration: none;align-items: center;" class="homepagelink"><i class="fa fa-home"></i>Home</a>
 {% endblock %}
 <br />
-
 {% block content %}
-<h3>Add Spendings..</h3>
+
+<div class="container">
+
+<h3>Add Spendings.</h3>
 
 {{error}}
 
 <form method="POST">
   {%csrf_token%} {{form.as_p}}
-  <input type="submit" value="Add Spnding" class="btn btn-primary" />
+  <input type="submit" value="Add Spending" class="submitbtn"/>
 </form>
+
+</div>
 {% endblock %}
+
+</body>
+</html>

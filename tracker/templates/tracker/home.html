@@ -160,8 +160,14 @@
   
   {% endif %}
   {% else %}
+  <br/>
+  {% if showguest %}
+<h3 class="title">{{showmsg}}</h3>
+  {% else %}
   <h3 class="title">Hello there! 
     <br/>Welcome, Guest...</h3>
+  {% endif %}
+  
     <br/>
     <br/>
     <p class="homepagetext">To Manage Spendings Again 
