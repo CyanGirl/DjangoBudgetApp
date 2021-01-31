@@ -1,31 +1,69 @@
-<a href="{% url 'home' %}">Home</a>
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/CSS"
+      href="{%static 'tracker/settings.css' %}"
+    />
+  </head>
+  <body class="bgcolor" style="font-family: 'Quicksand', sans-serif">
+    <a
+      href="{% url 'home' %}"
+      style="color: aliceblue; text-decoration: none; align-items: center"
+      class="homepagelink"
+      ><i class="fa fa-home"></i>Home</a
+    >
 
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+    <div class="maindiv">
+      <h2>Account Settings</h2>
+      <h4>Hi, {{user.username}}...<br />Choose options carefully!</h4>
+      <p>
+        1. Update Password :
+        <a
+          class="pwddesign"
+          style="text-decoration: none"
+          href="{% url 'password_change' %}"
+          >Click Here</a
+        >
+      </p>
 
-<h2>Account Settings</h2>
-<h4>Hi, {{user.username}}...<br />Choose options carefully!</h4>
-<p>1. Change Password</p>
-<a href="{% url 'password_change' %}">Change Password</a>
-<br />
-<form method="POST">
-  {%csrf_token%}
-  <p>2. To delete Account:</p>
-  {% if show %}
-  <p>{{deletemsg}}</p>
-  {% endif%}
+      <form method="POST">
+        {%csrf_token%}
+        <p>2. To delete Account:</p>
+        {% if show %}
+        <p>{{deletemsg}}</p>
+        {% endif%}
 
-  <label for="usertyped"
-    >Confirm By Typing:
-    <input
-      type="text"
-      name="usertyped"
-      id="usertyped"
-      placeholder="Username"
-      required
-  /></label>
-  <button type="submit" name="option" value="deleteme">Delete Account</button>
-</form>
+        <label for="usertyped"
+          >Confirm By Typing:
+          <input
+            type="text"
+            class="usertext"
+            name="usertyped"
+            id="usertyped"
+            placeholder="Username"
+            required
+        /></label>
+        <button class="deletebtn" type="submit" name="option" value="deleteme">
+          Delete Account
+        </button>
+      </form>
 
-{% else %}
-<h2>Please Login or Signup!</h2>
-{% endif %}
+      {% else %}
+      <h2>Please Login or Signup!</h2>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+.bgcolor {
+  background: linear-gradient(to right, #59c1de, #c950c1);
+}
+.homepagelink {
+  text-align: center;
+  border-radius: 5px;
+  width: 6vw;
+  height: 4vh;
+  background-color: #051758;
+  color: white;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  padding: 7px;
+  border-width: 1px;
+  border-style: #4569ec solid;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  font-size: 19px;
+  animation-name: fade-in-fwd;
+  animation: fade-in-fwd 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.homepagelink:hover {
+  background-color: rgb(228, 46, 82);
+}
+.box {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #ccc;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 9px;
+  width: 55vw;
+  padding: 4%;
+  text-align: right;
+  margin: auto;
+  margin-top: 7%;
+  height: 60vh;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  animation-name: tilt-in-left-1;
+  animation: tilt-in-left-1 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.image {
+  width: 17vw;
+  height: 34vh;
+  border-radius: 50%;
+  animation-name: pulsate-fwd;
+  animation: pulsate-fwd 0.7s ease-in-out infinite both;
+}
+
+.username,
+.password1,
+.password2,
+.submitbtn {
+  margin: 12px;
+}
+
+.submitdesign {
+  right: 16%;
+  position: relative;
+  border-radius: 5px;
+  border-width: 0px;
+  padding: 5px 10px 8px 10px;
+  width: 8vw;
+  height: 5vh;
+  background: linear-gradient(to right, #45a1bb, #c950c1);
+  color: white;
+}
+
+.submitdesign:hover {
+  background: linear-gradient(to right, #4a58cf, #c950c1);
+}
+
+.signup {
+  right: 30%;
+  position: relative;
+}
+
+#username,
+#password1,
+#password2 {
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  margin: 8px 0;
+  outline: none;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+#username:focus,
+#password1:focus,
+#password2:focus {
+  border-color: dodgerblue;
+  box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+@keyframes pulsate-fwd {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes tilt-in-left-1 {
+  from {
+    transform: rotateX(-30deg) translateX(-300px) skewX(-30deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg) translateX(0) skewX(0deg);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .box {
+    display: flex;
+    flex-direction: column;
+    height: 78vh;
+    width: 60vw;
+    align-items: center;
+  }
+  #loginimg {
+    height: 20vh;
+    width: 24vw;
+  }
+
+  .submitdesign {
+    right: 25%;
+    position: relative;
+    width: 19vw;
+    height: 6vh;
+  }
+
+  .homepagelink {
+    height: 4vh;
+    width: 24vw;
+  }
+}

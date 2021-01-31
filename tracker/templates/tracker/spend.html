@@ -4,9 +4,11 @@
 <head>
   {% load static %}
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/CSS" href="{%static 'tracker/spend.css' %}" />
 </head>
-<body class="bgcolor"> 
+<body class="bgcolor" style="font-family: 'Quicksand', sans-serif;">
   <a href="{% url 'home' %}" style="color: aliceblue;   text-decoration: none;align-items: center;" class="homepagelink"><i class="fa fa-home"></i>Home</a>
 {% endblock %}
 <br />
@@ -14,7 +16,7 @@
 
 <div class="container">
 
-<h3>Add Spendings.</h3>
+<h3 style="font-family: 'Quicksand', sans-serif;">Add Spendings.</h3>
 
 {{error}}
 

@@ -3,6 +3,10 @@ from datetime import datetime
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import dataframe_image as dfi
+import seaborn as sns
 
 def getMonthDetails(array,date):
     print(array)
@@ -23,6 +27,12 @@ def getMonthDetails(array,date):
         reqDf=reqDf[["Spend_ID","Category","Amount","Spent_On","Comments"]]
         total=reqDf['Amount'].sum()
         countOf=reqDf['Amount'].count()
+        print(reqDf)
+
+        if len(reqDf)<1:
+            havedetails=False
+            return[[[]],0,0,None,None,None,havedetails,f"Looks like you have no spendings for {date}"]
+
 
         #categorising
         grouped=reqDf.groupby('Category')
@@ -57,11 +67,11 @@ def getMonthDetails(array,date):
             getMonthAnalysis(df,date)
             showbar=True
 
-        return[reqDf.values.tolist(),total,countOf,categorised,eachsum,showbar,havedetails]
+        return[reqDf.values.tolist(),total,countOf,categorised,eachsum,showbar,havedetails,""]
     
     else:
         havedetails=False
-        return[[[]],0,0,None,None,None,havedetails]
+        return[[[]],0,0,None,None,None,havedetails,"Looks like you have no spendings yet...."]
 
 def allSpendings(array):
     print("here It is", len(array))
@@ -104,12 +114,12 @@ def allSpendings(array):
         plt.savefig("tracker/static/images/allPie.png")
 
 
-        return[df.values.tolist(),total,countOf,categorised,eachsum,havedetails]
+        return[df.values.tolist(),total,countOf,categorised,eachsum,havedetails,""]
 
     else:
         havedetails=False
         print(havedetails)
-        return[[[]],0,0,None,None,None,havedetails]
+        return[[[]],0,0,None,None,None,havedetails,"Looks like you have no spendings here yet...."]
 
 def getMonthAnalysis(df,year):
     monthDf=df.copy()

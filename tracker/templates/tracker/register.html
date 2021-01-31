@@ -1,7 +1,27 @@
-{%extends 'base.html'%} {% block nav %}
-<a href="{% url 'home' %}">Home Page</a>
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/CSS" href="{%static 'tracker/register.css' %}" />
+</head>
+<body class="bgcolor" style="font-family: 'Quicksand', sans-serif;">
+
+
+{% block nav %}
+<a href="{% url 'home' %}" style="color: aliceblue;   text-decoration: none;align-items: center;" class="homepagelink"><i class="fa fa-home"></i>Home</a>
 {% endblock %} {%block content%}
-<h2>Sign up</h2>
+
+<div class="box">
+
+<div class="image">
+  <a href="{% url 'home' %}"><img id="loginimg" src="{% static 'images/login.png' %}" alt="Laptop"></a>
+</div>  
+
+<div class="rightdiv">
+<h2 class="signup">Sign up</h2>
 
 {% if show %}
 <p>{{message}}</p>
@@ -9,19 +29,20 @@
 <br />
 <form method="POST">
   {%csrf_token%}
-  <label for="username"
-    >Username
-    <input type="text" name="username" placeholder="username" id="username" />
-  </label>
-  <label for="password1"
-    >Password
-    <input type="password" name="password1" id="password1" placeholder="" />
-  </label>
-  <label for="password2"
-    >Confirm Password
-    <input type="password" name="password2" id="password2" placeholder="" />
-  </label>
-  <input type="submit" value="Sign up" class="btn btn-primary" />
+  <div class="username">
+   <input type="text" name="username" placeholder="UserName" id="username" required />
+</div>
+  <div class="password1">
+    <input type="password" name="password1" id="password1" placeholder="Enter Password" required />
+  </div>
+  <div class="password2">
+  <input type="password" name="password2" id="password2" placeholder="Confirm Password" required/>
+</div>
+  <input type="submit" value="Sign up" class="submitbtn submitdesign" />
 </form>
 
 {%endblock%}
+</div>
+</div>
+</body>
+</html>

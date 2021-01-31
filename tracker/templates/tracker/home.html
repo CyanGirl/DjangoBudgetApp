@@ -83,6 +83,15 @@
 </div>
     <br />
     
+    <div class="mailsection">
+      <form method="POST">
+        {%csrf_token%}
+        <input type="email" name="sendmail" placeholder="Email" required/>
+        <button type="submit" name="view" value="sendmail">Get Mail</button>
+      </form>
+    </div>
+    <br/>
+
     <div class="table-responsive container">
       <table class="table-striped">
         <tr>
@@ -97,12 +106,20 @@
           {% for rowdata in data %}
           <td>{{rowdata}}</td>
           {% endfor %}
+          <td>
+            <form method="POST">
+              {%csrf_token%}
+              <button name="view" type="submit" value="{{data}}">Delete</button>
+            </form>
+            
+          </td>
         </tr>
         {% endfor %}
       </table>
     </div>
     <br />
 
+    
     <br />
     <br />
     <h5>Category Based:</h5>
@@ -155,6 +172,8 @@
     <a href="{% url 'spend' %}" class="homebutton">
       Here
     </a>
+    <br/>
+    Or <a href="{% url 'home' %}" class="homebutton">Refresh</a>
   </p>
 
   

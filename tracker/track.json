@@ -1,0 +1,117 @@
+{
+    "table": [
+        [
+            13,
+            "Foods",
+            900,
+            "2021-01-28",
+            "checking4"
+        ],
+        [
+            14,
+            "Others",
+            600,
+            "2021-01-28",
+            "Checking"
+        ],
+        [
+            12,
+            "Travel",
+            200,
+            "2021-01-23",
+            "Checking for Day"
+        ],
+        [
+            16,
+            "Foods",
+            1000,
+            "2021-01-21",
+            "just chilling"
+        ],
+        [
+            4,
+            "Travel",
+            90,
+            "2021-01-20",
+            "just chilling"
+        ],
+        [
+            15,
+            "Travel",
+            100,
+            "2021-01-12",
+            "Checking3"
+        ]
+    ],
+    "header": [
+        "Spend_ID",
+        "Category",
+        "Amount",
+        "Spent_On",
+        "Comments"
+    ],
+    "total": 2890,
+    "count": 6,
+    "havemsg": "",
+    "message": "Present Month",
+    "categorised": {
+        "Foods": [
+            [
+                13,
+                "Foods",
+                900,
+                "2021-01-28",
+                "checking4"
+            ],
+            [
+                16,
+                "Foods",
+                1000,
+                "2021-01-21",
+                "just chilling"
+            ]
+        ],
+        "Others": [
+            [
+                14,
+                "Others",
+                600,
+                "2021-01-28",
+                "Checking"
+            ]
+        ],
+        "Travel": [
+            [
+                12,
+                "Travel",
+                200,
+                "2021-01-23",
+                "Checking for Day"
+            ],
+            [
+                4,
+                "Travel",
+                90,
+                "2021-01-20",
+                "just chilling"
+            ],
+            [
+                15,
+                "Travel",
+                100,
+                "2021-01-12",
+                "Checking3"
+            ]
+        ]
+    },
+    "eachsum": {
+        "Foods": 1900,
+        "Others": 600,
+        "Travel": 390
+    },
+    "showbar": false,
+    "havedetails": true,
+    "haveday": false,
+    "daysum": 0,
+    "showguest": false
+}

@@ -11,8 +11,8 @@
   margin-top: 7%;
   height: 35vh;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  animation-name: slide-in-elliptic-left-fwd;
-  animation: slide-in-elliptic-left-fwd 1.5s
+  animation-name: slide-in-left-fwd;
+  animation: slide-in-left-fwd 1.5s
     cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -31,7 +31,7 @@
   border-style: #4569ec solid;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   font-size: 19px;
-  animation-name: slide-in-top;
+  animation-name: slide-top;
   animation-delay: 1s;
   animation-duration: 3s;
   animation-fill-mode: backwards;
@@ -70,7 +70,7 @@
   position: relative;
 }
 
-@keyframes slide-in-elliptic-left-fwd {
+@keyframes slide-in-left-fwd {
   from {
     transform: translateX(-800px) rotateY(30deg) scale(0);
     transform-origin: -100% 50%;
@@ -83,7 +83,7 @@
   }
 }
 
-@keyframes slide-in-top {
+@keyframes slide-top {
   from {
     transform: translateY(-1000px);
     opacity: 0;
@@ -94,7 +94,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .box {
     flex-direction: column;
     display: flex;
